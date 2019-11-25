@@ -18,3 +18,27 @@ Do whatever you want with the JSON output:
 ```
 python analyzer.py Local* > results.json
 ```
+
+The results are organized like so:
+```
+{
+	# Date
+	"2019.04.26": {
+		# Session start (No jumps this session)
+		"10:16:44": [],
+		"11:48:31": [
+			{
+				# Jump time, and desetination
+				"12:00:40": "Urlen"
+			},
+			{
+				"12:01:44": "Perimeter"
+			},
+			...
+		]
+	},
+	"2019.04.27": {
+		...
+	}
+}
+```
