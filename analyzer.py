@@ -31,4 +31,5 @@ for file in sys.argv[1:]:
 
 					# jumps[session[0]][session[1]].append({results.group(1): results.group(2)})
 
-print(jumps)
+for j in jumps:
+	print(j)
