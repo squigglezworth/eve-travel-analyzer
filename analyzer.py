@@ -23,28 +23,30 @@ for file in args.files:
 		if (channel in CHANNELS and listener in listeners):
 			session = lines[9].strip().split()[-2:]
 
-			if session[0] in jumps:
-				if args.format == 'detailed':
-					jumps[session[0]].update({session[1]: []})
-				elif args.format == 'totals':
-					jumps[session[0]] += 1
-			else:
-				if args.format == 'detailed':
-					jumps[session[0]] = {session[1]: []}
-				elif args.format == 'totals':
-					jumps[session[0]] = 0
+			# if session[0] in jumps:
+			# 	if args.format == 'detailed':
+			# 		jumps[session[0]].update({session[1]: []})
+			# 	elif args.format == 'totals':
+			# 		jumps[session[0]] += 1
+			# else:
+			# 	if args.format == 'detailed':
+			# 		jumps[session[0]] = {session[1]: []}
+			# 	elif args.format == 'totals':
+			# 		jumps[session[0]] = 0
 
 			for line in lines[START_LINE:]:
 				if re.search('Channel changed to Local', line):
-					results = re.search("\[ .* (.*) \].*Channel\ changed\ to\ Local\ :\ (.*)", line)
+					results = re.search("\[ (.*) (.*) \].*Channel\ changed\ to\ Local\ :\ (.*)", line)
 
 					if args.format == 'simple':
-						jumps.append('{}\t{}\t{}'.format(session[0], results.group(1), results.group(2)))
-					elif args.format == 'detailed':
-						jumps[session[0]][session[1]].append({results.group(1): results.group(2)})
+						jumps.append('{}\t{}\t{}'.format(results.group(1), results.group(2), results.group(3)))
+					# elif args.format == 'detailed':
+					# 	jumps[session[0]][session[1]].append({results.group(2): results.group(3)})
 					elif args.format == 'totals':
-						jumps[session[0]] += 1
-
+						if results.group(1) in jumps:
+							jumps[results.group(1)] += 1
+						else:
+							jumps[results.group(1)] = 0
 if args.format == 'simple':
 	for j in jumps:
 		print(j)
