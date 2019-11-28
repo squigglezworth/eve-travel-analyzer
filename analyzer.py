@@ -5,7 +5,7 @@ listeners = ['Sen Isu']
 
 
 parser = argparse.ArgumentParser(description='Analyze EVE Online chat logs to determine jumps made', formatter_class=argparse.RawTextHelpFormatter)
-parser.add_argument('--output-format', dest='format', type=str, help='Output format\n\tsimple: tab-separated list of jumps\n\ttotals: total jumps per day\n\tdetailed: JSON with all info (including session changes)', choices=['simple', 'totals', 'detailed'], default='simple')
+parser.add_argument('--output-format', dest='format', type=str, help='Output format\n\tsimple: tab-separated list of jumps\n\ttotals: total jumps per day', choices=['simple', 'totals'], default='simple')
 parser.add_argument('files', help='Chat logs to analyze', nargs='+')
 args = parser.parse_args()
 # Start at line 13 to skip the log info section
@@ -50,8 +50,8 @@ for file in args.files:
 if args.format == 'simple':
 	for j in jumps:
 		print(j)
-elif args.format == 'detailed':
-	print(json.dumps(jumps))
+# elif args.format == 'detailed':
+# 	print(json.dumps(jumps))
 elif args.format == 'totals':
 	for j, i in sorted(jumps.items()):
 		print(j, i, sep='\t')
