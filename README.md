@@ -39,27 +39,3 @@ python analyzer.py Local* > results
 2019.11.25      247
 ...
 ```
-
-'detailed' output will give a bunch of JSON, formatted like so:
-```
-{
-	# Date
-	"2019.04.26": {
-		# Session start (No jumps this session)
-		"10:16:44": [],
-		"11:48:31": [
-			{
-				# Jump time, and desetination
-				"12:00:40": "Urlen"
-			},
-			{
-				"12:01:44": "Perimeter"
-			},
-			...
-		]
-	},
-	"2019.04.27": {
-		...
-	}
-}
-```
